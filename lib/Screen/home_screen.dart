@@ -1,11 +1,11 @@
+import 'package:fakih/l10n/localized_values.dart';
 import 'package:flutter/material.dart';
 import '../Features/check_for_update.dart';
 import '../Model/wyf_app.dart';
-import '../Model/app_data.dart';
 import '../Widgets/home_body_widget.dart';
 import '../Widgets/custom_app_drawer.dart';
 import '../AppLifecycleReactor.dart';
-import '../AppOpenAdManager.dart';
+// import '../AppOpenAdManager.dart';
 import '../Screen/contactUs_screen.dart';
 import 'package:provider/provider.dart';
 import '../Model/theme_provider.dart';

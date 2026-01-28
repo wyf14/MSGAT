@@ -37,9 +37,11 @@ class DatabaseHelper {
   }
 
   // إدخال البيانات في الجدول
-  static Future<void> insertData(String tableName, Map<String, dynamic> data) async {
+  static Future<void> insertData(
+      String tableName, Map<String, dynamic> data) async {
     final db = await getDatabase();
-    await db.insert(tableName, data, conflictAlgorithm: ConflictAlgorithm.replace);
+    await db.insert(tableName, data,
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   // تحميل ملف CSV وإضافته إلى قاعدة البيانات
@@ -50,68 +52,86 @@ class DatabaseHelper {
     // await processCsvFile("messages", "gazal_messages");
     // await processCsvFile("messages", "ishq_messages");
     // await processCsvFile("messages", "nsay7_hekm");
+
+    await processCsvFile("messages", "baby_messages");
+    await processCsvFile("messages", "tips_messages");
+    await processCsvFile("messages", "positivity_messages");
+    await processCsvFile("messages", "blessing_messages");
+    await processCsvFile("messages", "be_positive_messages");
+    await processCsvFile("messages", "marriage_messages");
+    await processCsvFile("messages", "eid_alfitr_messages");
+    await processCsvFile("messages", "eid_aladha_messages");
+    await processCsvFile("messages", "friday_messages");
+    await processCsvFile("messages", "success_messages");
+    await processCsvFile("messages", "house_messages");
+    await processCsvFile("messages", "car_messages");
+    await processCsvFile("messages", "secondary_messages");
+    await processCsvFile("messages", "medical_university_messages");
+    await processCsvFile("messages", "technology_university_messages");
     await processCsvFile("messages", "shoq_messages");
   }
 
   // معالجة ملف CSV وإدخال بياناته في قاعدة البيانات
-  static Future<void> processCsvFile(String tableName, String csvFileName) async {
+  static Future<void> processCsvFile(
+      String tableName, String csvFileName) async {
     try {
-          // استخدام الدالة المعدلة لتحميل البيانات مع الصف الأول
+      // استخدام الدالة المعدلة لتحميل البيانات مع الصف الأول
       List<List<String>> rows = await loadCSVFromAssets(csvFileName);
 
       await insertListToDB(rows, tableName);
     } catch (e) {
       print('حدث خطأ أثناء إدخال بيانات CSV إلى قاعدة البيانات: $e');
-     showToast("حدث خطأ أثناء تحميل البيانات: $e" );
+      showToast("حدث خطأ أثناء تحميل البيانات: $e");
     }
   }
 
-  static Future<void> insertListToDB(List<List<String>> rows, String tableName) async {
-     if (rows.isNotEmpty) {
-    
+  static Future<void> insertListToDB(
+      List<List<String>> rows, String tableName) async {
+    if (rows.isNotEmpty) {
       // استخراج أسماء الأعمدة من أول صف
       List<String> columnNames = rows.first.map((e) => e.toString()).toList();
       rows.removeAt(0); // إزالة الصف الأول (أسماء الأعمدة)
-    
+
       // التحقق من وجود بيانات بعد الصف الأول
       if (rows.isEmpty) {
         print("الملف لا يحتوي على بيانات بعد أسماء الأعمدة.");
-       showToast(            "لا توجد بيانات لتحميلها!"          );
+        showToast("لا توجد بيانات لتحميلها!");
         return;
       }
-    
-    showToast( "تم تحميل ${rows.length} صفوف"        );
-    
+
+      showToast("تم تحميل ${rows.length} صفوف");
+
       // إدخال البيانات في قاعدة البيانات
       final db = await getDatabase();
       await db.transaction((txn) async {
         for (var row in rows) {
-          Map<String, dynamic> rowData = {};  // خريطة لتخزين البيانات
-    
+          Map<String, dynamic> rowData = {}; // خريطة لتخزين البيانات
+
           // تعيين القيم بناءً على أسماء الأعمدة
           for (int i = 0; i < columnNames.length; i++) {
             // التأكد من أن الصف يحتوي على القيمة المتوقعة في نفس الموضع
             if (i < row.length) {
-              rowData[columnNames[i]] = row[i];  // إضافة القيم من الصف الحالي
+              rowData[columnNames[i]] = row[i]; // إضافة القيم من الصف الحالي
             }
           }
-    
+
           // إدخال البيانات في قاعدة البيانات
-          await txn.insert(tableName, rowData, conflictAlgorithm: ConflictAlgorithm.replace);
+          await txn.insert(tableName, rowData,
+              conflictAlgorithm: ConflictAlgorithm.replace);
         }
       });
-    
-    return;
-     } 
-    else {
+
+      return;
+    } else {
       print("الملف فارغ أو لا يحتوي على بيانات.");
-      showToast(           "الملف فارغ أو لا يحتوي على بيانات"        );
-        return;
+      showToast("الملف فارغ أو لا يحتوي على بيانات");
+      return;
     }
   }
 
   // دالة تحميل CSV مع الصف الأول
-  static Future<List<List<String>>> loadCSVFromAssets(String csvFileName) async {
+  static Future<List<List<String>>> loadCSVFromAssets(
+      String csvFileName) async {
     String csvFilePath = "assets/csv/$csvFileName.csv";
     String csvData = await rootBundle.loadString(csvFilePath);
 
@@ -122,9 +142,9 @@ class DatabaseHelper {
   }
 
   static List<List<String>> csvStringToList(String csvData) {
-     // تقسيم البيانات إلى صفوف
+    // تقسيم البيانات إلى صفوف
     List<String> rows = csvData.split('\n');
-    
+
     // تخزين جميع الصفوف بما في ذلك الصف الأول (الرؤوس)
     List<List<String>> data = [];
     for (int i = 0; i < rows.length; i++) {
@@ -135,36 +155,41 @@ class DatabaseHelper {
   }
 
   // دالة للتحقق إذا كانت الرسالة موجودة في المفضلة
- static Future<bool> isFavorite(int messageId) async {
+  static Future<bool> isFavorite(int messageId) async {
     final db = await getDatabase();
     final result = await db.query(
-      'favs',  // اسم جدول المفضلة
+      'favs', // اسم جدول المفضلة
       where: 'msg_id = ?',
       whereArgs: [messageId],
     );
     return result.isNotEmpty;
   }
+
   // دالة لإضافة رسالة إلى المفضلة
   static Future<void> addToFavorites(int messageId) async {
     final db = await getDatabase();
     await db.insert(
-      'favs',  // اسم جدول المفضلة
-      {'msg_id': messageId},  // هنا نفترض أن هناك عمود message_id في جدول المفضلة
-      conflictAlgorithm: ConflictAlgorithm.replace,  // في حالة وجود نفس السجل يتم استبداله
+      'favs', // اسم جدول المفضلة
+      {
+        'msg_id': messageId
+      }, // هنا نفترض أن هناك عمود message_id في جدول المفضلة
+      conflictAlgorithm:
+          ConflictAlgorithm.replace, // في حالة وجود نفس السجل يتم استبداله
     );
   }
+
   // دالة لحذف الرسالة من المفضلة
   static Future<void> removeFromFavorites(int messageId) async {
     final db = await getDatabase();
     await db.delete(
-      'favs',  // اسم جدول المفضلة
+      'favs', // اسم جدول المفضلة
       where: 'msg_id = ?',
       whereArgs: [messageId],
     );
   }
 
   // دالة لإضافة أو إزالة الرسالة من المفضلة بناءً على حالتها
- static Future<void> addFav(int messageId) async {
+  static Future<void> addFav(int messageId) async {
     bool alreadyFav = await isFavorite(messageId);
 
     if (!alreadyFav) {
@@ -193,6 +218,4 @@ class DatabaseHelper {
     final List<Map<String, dynamic>> favs = await db.query('favs');
     return favs.map((f) => f['msg_id'] as int).toSet();
   }
-
-
 }

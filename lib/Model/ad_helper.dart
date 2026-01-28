@@ -2,26 +2,27 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-class AdHelper{
-static String bannerAdUnitId() {
-  if (Platform.isAndroid) {
-    return 'ca-app-pub-3940256099942544/9214589741'; // وحدة اختبارية لـ Android
-  } else if (Platform.isIOS) {
-    return 'ca-app-pub-3940256099942544/2435281174'; // وحدة اختبارية لـ iOS
-  } else {
-    throw UnsupportedError('Unsupported platform');
+class AdHelper {
+  static String bannerAdUnitId() {
+    if (Platform.isAndroid) {
+      return 'ca-app-pub-3940256099942544/9214589741'; // وحدة اختبارية لـ Android
+    } else if (Platform.isIOS) {
+      return 'ca-app-pub-3940256099942544/2435281174'; // وحدة اختبارية لـ iOS
+    } else {
+      throw UnsupportedError('Unsupported platform');
+    }
   }
-}
 
-static String interstitialAdUnitId() {
-if (Platform.isAndroid) {
-return 'ca-app-pub-3940256099942544/1033173712'; // وحدة اختبارية لـ Android
-} else if (Platform.isIOS) {
-return 'ca-app-pub-3940256099942544/4411468910'; // وحدة اختبارية لـ iOS
-} else {
-throw UnsupportedError('Unsupported platform');
-}
-}
+  static String interstitialAdUnitId() {
+    if (Platform.isAndroid) {
+      return 'ca-app-pub-3940256099942544/1033173712'; // وحدة اختبارية لـ Android
+    } else if (Platform.isIOS) {
+      return 'ca-app-pub-3940256099942544/4411468910'; // وحدة اختبارية لـ iOS
+    } else {
+      throw UnsupportedError('Unsupported platform');
+    }
+  }
+
   static String get nativeAdUnitId {
     if (Platform.isAndroid) {
       return 'ca-app-pub-3940256099942544/2247696110';
@@ -50,7 +51,7 @@ class AdManager extends ChangeNotifier {
   void _loadBannerAd() {
     if (_bannerAd == null) {
       _bannerAd = BannerAd(
-        size: AdSize.banner,
+        size: AdSize.fullBanner, // عرض كامل الصفحة
         adUnitId: AdHelper.bannerAdUnitId(),
         listener: BannerAdListener(
           onAdLoaded: (ad) {
@@ -70,8 +71,7 @@ class AdManager extends ChangeNotifier {
           },
         ),
         request: const AdRequest(),
-      )
-        ..load();
+      )..load();
     }
   }
 
@@ -89,10 +89,11 @@ class AdManager extends ChangeNotifier {
         adLoadCallback: InterstitialAdLoadCallback(
           // Called when an ad is successfully received.
           onAdLoaded: (ad) {
-            debugPrint('🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉 Interstitial Ad Loaded Successfully!');
+            debugPrint(
+                '🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉 Interstitial Ad Loaded Successfully!');
 
             ad.fullScreenContentCallback = FullScreenContentCallback(
-              // Called when the ad showed the full screen content.
+                // Called when the ad showed the full screen content.
                 onAdShowedFullScreenContent: (ad) {},
                 // Called when an impression occurs on the ad.
                 onAdImpression: (ad) {},
@@ -115,11 +116,13 @@ class AdManager extends ChangeNotifier {
           },
           // Called when an ad request failed.
           onAdFailedToLoad: (LoadAdError error) {
-            debugPrint('❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌ Failed to load interstitial ad: $error');
+            debugPrint(
+                '❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌ Failed to load interstitial ad: $error');
             debugPrint('InterstitialAd failed to load: $error');
           },
         ));
   }
+
   void showInterstitialAd(VoidCallback onAdClosed) {
     if (_interstitialAd != null) {
       _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
@@ -140,6 +143,4 @@ class AdManager extends ChangeNotifier {
       onAdClosed(); // إذا لم يكن الإعلان محملاً، انتقل مباشرةً للصفحة التالية
     }
   }
-
-
 }

@@ -23,7 +23,8 @@ class _SplashScreenState extends State<SplashScreen> {
     // await loadInitialData();
 
     // إذا كانت عملية تحميل البيانات تحتاج وقتًا أطول، يمكنك وضعها هنا.
-    await Future.delayed(Duration(seconds: 2)); // محاكاة تحميل البيانات لمدة 2 ثانية
+    await Future.delayed(
+        Duration(seconds: 2)); // محاكاة تحميل البيانات لمدة 2 ثانية
     Timer(Duration(seconds: 2), () {
       // بعد التحميل، ننتقل إلى الصفحة الرئيسية
       Navigator.pushReplacement(
@@ -36,10 +37,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal,  // اللون الأساسي لشاشة التحميل
-      body:
-      splash_body(),
+      backgroundColor: Colors.teal, // اللون الأساسي لشاشة التحميل
+      body: splash_body(),
     );
   }
 }
-

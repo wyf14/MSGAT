@@ -15,10 +15,10 @@ class BannerAdWidget extends StatelessWidget {
 
     return adManager.isAdLoaded
         ? Container(
-      width: adManager.bannerAd!.size.width.toDouble(),
-      height: adManager.bannerAd!.size.height.toDouble(),
-      child: AdWidget(ad: adManager.bannerAd!),
-    )
+            width: adManager.bannerAd!.size.width.toDouble(),
+            height: adManager.bannerAd!.size.height.toDouble(),
+            child: AdWidget(ad: adManager.bannerAd!),
+          )
         : const SizedBox(); //TODO custom ads ✅ لا يعرض الإعلان إلا عند تحميله
   }
 }
