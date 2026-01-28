@@ -1,0 +1,16 @@
+{
+  "updates": {
+    "messages": {
+      "last_update": "2025-05-01T10:00:00Z",
+      "version": 3
+    },
+    "categories": {
+      "last_update": "2025-05-01T10:00:00Z",
+      "version": 1
+    },
+    "sections": {
+      "last_update": "2025-05-01T10:00:00Z",
+      "version": 2
+    }
+  }
+}
