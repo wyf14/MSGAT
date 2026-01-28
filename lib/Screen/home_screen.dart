@@ -3,9 +3,12 @@ import '../Features/check_for_update.dart';
 import '../Model/wyf_app.dart';
 import '../Model/app_data.dart';
 import '../Widgets/home_body_widget.dart';
+import '../Widgets/custom_app_drawer.dart';
 import '../AppLifecycleReactor.dart';
 import '../AppOpenAdManager.dart';
-
+import '../Screen/contactUs_screen.dart';
+import 'package:provider/provider.dart';
+import '../Model/theme_provider.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -16,11 +19,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool _isDark = false;
   late AppLifecycleReactor _appLifecycleReactor;
   bool _isLoaded = false;
   String _selectedLanguage = 'العربية'; // اللغة الافتراضية
-
-
 
   @override
   void initState() {
@@ -39,35 +41,54 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Directionality(
-      textDirection: _selectedLanguage == 'العربية' ? TextDirection.rtl : TextDirection.ltr,
+      textDirection: _selectedLanguage == 'العربية'
+          ? TextDirection.rtl
+          : TextDirection.ltr,
       child: Scaffold(
         appBar: AppBar(
           title: Text(localizedValues[_selectedLanguage]!['app_name']!),
-          actions: [
-            DropdownButton<String>(
-              value: _selectedLanguage,
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedLanguage = newValue!;
-                  LanguagePreferences.saveLanguage(newValue);
-                });
-              },
-              items: <String>['العربية', 'English']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
-          ],
-          leading: buildAppIcon(width: 40, height: 40),
+          leading: Builder(
+            builder: (context) {
+              final isDark = Theme.of(context).brightness == Brightness.dark;
+              return IconButton(
+                icon: Icon(
+                  Icons.menu,
+                  color: isDark ? Colors.orange : Colors.white,
+                ),
+                onPressed: () => Scaffold.of(context).openDrawer(),
+              );
+            },
+          ),
         ),
-
-        body:
-        HomeBodyWidget(selectedLanguage: _selectedLanguage),
+        drawer: Consumer<ThemeProvider>(
+          builder: (context, themeProvider, _) => CustomAppDrawer(
+            isDark: themeProvider.themeMode == ThemeMode.dark,
+            selectedLanguage: _selectedLanguage,
+            onThemeToggle: () {
+              final newIsDark = themeProvider.themeMode != ThemeMode.dark;
+              themeProvider.toggleTheme(newIsDark);
+              setState(() {
+                _isDark = newIsDark;
+              });
+            },
+            onLanguageToggle: () {
+              setState(() {
+                _selectedLanguage =
+                    _selectedLanguage == 'العربية' ? 'English' : 'العربية';
+                LanguagePreferences.saveLanguage(_selectedLanguage);
+              });
+            },
+            onContact: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (c) => ContactUsPage()));
+            },
+            onShare: () {
+              shareApp();
+            },
+          ),
+        ),
+        body: HomeBodyWidget(selectedLanguage: _selectedLanguage),
       ),
     );
   }
@@ -92,9 +113,4 @@ class _MyHomePageState extends State<MyHomePage> {
 //     ),
 //   )..load();
 // }
-
-
-
-
 }
-

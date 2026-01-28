@@ -6,6 +6,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'Model/ad_helper.dart';
 import 'Model/language_provider.dart';
+import 'Model/theme_provider.dart';
 import 'Features/splash/presantation/splash_screen.dart';
 
 Future<void> main() async {
@@ -19,8 +20,9 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => AdManager()),  // مزود الإعلانات
-        ChangeNotifierProvider(create: (context) => languageProvider), // مزود اللغة
+        ChangeNotifierProvider(create: (context) => AdManager()),
+        ChangeNotifierProvider(create: (context) => languageProvider),
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ],
       child: const MyApp(),
     ),
@@ -32,12 +34,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
       title: WYFApp.APP_NAME,
       theme: MyThemes.lightTheme,
+      darkTheme: MyThemes.darkTheme,
+      themeMode: themeProvider.themeMode,
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
     );
   }
-
 }

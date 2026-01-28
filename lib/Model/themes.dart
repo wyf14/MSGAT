@@ -1,59 +1,125 @@
 import 'package:flutter/material.dart';
 
-class MyThemes{
-  static ThemeData pastelTheme = ThemeData(
-    brightness: Brightness.light,
-    primaryColor: Color(0xFFFFEBEE),
-    scaffoldBackgroundColor: Color(0xFFFFEBEE),
-    textTheme: TextTheme(
-      bodyLarge: TextStyle(color: Color(0xFF424242)),
-      bodyMedium: TextStyle(color: Color(0xFF757575)),
-    ),
-    buttonTheme: ButtonThemeData(
-      buttonColor: Color(0xFFA5D6A7),
-      textTheme: ButtonTextTheme.primary,
-    ),
-  );
-  static ThemeData neutralTheme = ThemeData(
-    brightness: Brightness.light,
-    primaryColor: Color(0xFFF5F5F5),
-    secondaryHeaderColor: Color(0xFF607D8B),
-    scaffoldBackgroundColor: Color(0xFFF5F5F5),
-    textTheme: TextTheme(
-      bodyLarge: TextStyle(color: Colors.black),
-      bodySmall: TextStyle(color: Color(0xFF424242)),
-    ),
-    buttonTheme: ButtonThemeData(
-      buttonColor: Color(0xFF1565C0),
-      textTheme: ButtonTextTheme.primary,
-    ),
-  );
-  static ThemeData darkTheme = ThemeData(
-    brightness: Brightness.dark,
-    primaryColor: Color(0xFF1E1E2C),
-    secondaryHeaderColor: Color(0xFFBB86FC),
-    scaffoldBackgroundColor: Color(0xFF1E1E2C),
-    textTheme: TextTheme(
-      labelLarge: TextStyle(color: Colors.white),
-      bodySmall: TextStyle(color: Colors.white70),
-    ),
-    buttonTheme: ButtonThemeData(
-      buttonColor: Color(0xFF03DAC5),
-      textTheme: ButtonTextTheme.primary,
-    ),
-  );
+class MyThemes {
+  // ثيم لايت: برتقالي على أبيض
   static ThemeData lightTheme = ThemeData(
+    useMaterial3: true,
     brightness: Brightness.light,
-    primaryColor: Colors.white,
-    secondaryHeaderColor: Color(0xFF2196F3),
-    scaffoldBackgroundColor: Colors.white,
+    colorScheme: ColorScheme.light(
+      primary: Color(0xFFFF9800), // برتقالي أساسي
+      secondary: Color(0xFFFFB74D), // برتقالي فاتح
+      surface: Color(0xFFFFFFFF),
+      onPrimary: Colors.white,
+      onSecondary: Color(0xFF333333),
+      onSurface: Color(0xFF222222),
+    ),
+    scaffoldBackgroundColor: Color(0xFFFFFFFF),
+    appBarTheme: AppBarTheme(
+      backgroundColor: Color(0xFFFF9800),
+      foregroundColor: Colors.white,
+      elevation: 0,
+      iconTheme: IconThemeData(color: Color(0xFFFF9800)),
+      titleTextStyle: TextStyle(
+          fontFamily: 'Tajawal',
+          fontWeight: FontWeight.bold,
+          fontSize: 22,
+          color: Colors.white),
+    ),
     textTheme: TextTheme(
-      bodyLarge: TextStyle(color: Color(0xFF333333)),
-      bodySmall: TextStyle(color: Color(0xFF666666)),
+      displayLarge: TextStyle(
+          fontFamily: 'Tajawal',
+          color: Color(0xFFFF9800),
+          fontWeight: FontWeight.bold,
+          fontSize: 28),
+      bodyLarge: TextStyle(
+          fontFamily: 'Tajawal', color: Color(0xFF222222), fontSize: 18),
+      bodyMedium: TextStyle(fontFamily: 'Tajawal', color: Color(0xFFFF9800)),
+      bodySmall: TextStyle(fontFamily: 'Tajawal', color: Color(0xFFFFB74D)),
+    ),
+    cardTheme: CardThemeData(
+      color: Colors.white,
+      elevation: 4,
+      shadowColor: Color(0xFFFF9800).withOpacity(0.10),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: Color(0xFFFF9800),
+      foregroundColor: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
     buttonTheme: ButtonThemeData(
       buttonColor: Color(0xFFFF9800),
       textTheme: ButtonTextTheme.primary,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
+    inputDecorationTheme: InputDecorationTheme(
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
+      filled: true,
+      fillColor: Color(0xFFFFF3E0),
+      hintStyle: TextStyle(color: Color(0xFFFFB74D)),
+    ),
+    iconTheme: IconThemeData(color: Color(0xFFFF9800)),
+    dividerColor: Color(0xFFFF9800).withOpacity(0.15),
+  );
+
+  // ثيم دارك: برتقالي على أسود
+  static ThemeData darkTheme = ThemeData(
+    useMaterial3: true,
+    brightness: Brightness.dark,
+    colorScheme: ColorScheme.dark(
+      primary: Color(0xFFFF9800), // برتقالي أساسي
+      secondary: Color(0xFFFFB74D), // برتقالي فاتح
+      surface: Color(0xFF23232F),
+      onPrimary: Colors.black,
+      onSecondary: Colors.black,
+      onSurface: Colors.white,
+    ),
+    scaffoldBackgroundColor: Color(0xFF181820),
+    appBarTheme: AppBarTheme(
+      backgroundColor: Color(0xFF23232F),
+      foregroundColor: Color(0xFFFF9800),
+      elevation: 0,
+      iconTheme: IconThemeData(color: Color(0xFFFF9800)),
+      titleTextStyle: TextStyle(
+          fontFamily: 'Tajawal',
+          fontWeight: FontWeight.bold,
+          fontSize: 22,
+          color: Color(0xFFFF9800)),
+    ),
+    textTheme: TextTheme(
+      displayLarge: TextStyle(
+          fontFamily: 'Tajawal',
+          color: Color(0xFFFF9800),
+          fontWeight: FontWeight.bold,
+          fontSize: 28),
+      bodyLarge:
+          TextStyle(fontFamily: 'Tajawal', color: Colors.white, fontSize: 18),
+      bodyMedium: TextStyle(fontFamily: 'Tajawal', color: Color(0xFFFF9800)),
+      bodySmall: TextStyle(fontFamily: 'Tajawal', color: Color(0xFFFFB74D)),
+    ),
+    cardTheme: CardThemeData(
+      color: Color(0xFF23232F),
+      elevation: 4,
+      shadowColor: Color(0xFFFF9800).withOpacity(0.10),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: Color(0xFFFF9800),
+      foregroundColor: Colors.black,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    ),
+    buttonTheme: ButtonThemeData(
+      buttonColor: Color(0xFFFF9800),
+      textTheme: ButtonTextTheme.primary,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
+      filled: true,
+      fillColor: Color(0xFF23232F),
+      hintStyle: TextStyle(color: Color(0xFFFFB74D)),
+    ),
+    iconTheme: IconThemeData(color: Color(0xFFFF9800)),
+    dividerColor: Color(0xFFFF9800).withOpacity(0.15),
   );
 }
