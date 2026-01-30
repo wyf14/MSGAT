@@ -1,52 +1,61 @@
+import 'package:fakih/Model/wyf_app.dart';
 import 'package:flutter/material.dart';
+import 'package:fakih/l10n/localized_values.dart';
 
 class AppInfoPage extends StatelessWidget {
+  late ThemeData theme;
+  String _selectedLanguage = 'العربية'; // اللغة الافتراضية
+
+  initState() {
+    // تحديد اللغة المختارة من الثيم أو التطبيق
+    LanguagePreferences.getLanguage().then((lang) {
+      _selectedLanguage = lang;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('معلومات عن التطبيق'),
-        backgroundColor: Colors.blueAccent,
+        title: Text(localizedValues[_selectedLanguage]!['about_app_title'] ??
+            'معلومات عن التطبيق'),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // عنوان المعلومات
             Text(
-              'معلومات عن تطبيق المسجات',
+              localizedValues[_selectedLanguage]!['about_app_header'] ??
+                  'معلومات عن تطبيق المسجات',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Colors.blueAccent,
               ),
             ),
             SizedBox(height: 20),
-
-            // مقدمة عن التطبيق داخل إطار
-            _buildSectionTitle('مقدمة عن التطبيق:'),
-            _buildRightBorderContainer(
-              Text(              'تطبيق المسجات هو تطبيق مميز يهدف إلى توفير مجموعة متنوعة من الرسائل المتخصصة لتناسب كل مناسبة. يتميز التطبيق بواجهة بسيطة وسهلة الاستخدام تتيح للمستخدمين الوصول إلى رسائل مخصصة في مختلف التصنيفات.',
-              )
-            ),
+            _buildSectionTitle(
+                localizedValues[_selectedLanguage]!['about_app_intro_title'] ??
+                    'مقدمة عن التطبيق:'),
+            _buildRightBorderContainer(Text(
+                localizedValues[_selectedLanguage]!['about_app_intro'] ??
+                    'تطبيق المسجات هو تطبيق مميز...')),
             SizedBox(height: 20),
-
-            // المميزات الرئيسية داخل إطار
-            _buildSectionTitle('المميزات الرئيسية للتطبيق:'),
-            _buildFeatureList(),
-
+            _buildSectionTitle(localizedValues[_selectedLanguage]![
+                    'about_app_features_title'] ??
+                'المميزات الرئيسية للتطبيق:'),
+            _buildFeatureList(_selectedLanguage),
             SizedBox(height: 20),
-
-            // كيفية استخدام التطبيق داخل إطار
-            _buildSectionTitle('كيفية استخدام التطبيق:'),
-            _buildUsageInstructions(),
-
+            _buildSectionTitle(
+                localizedValues[_selectedLanguage]!['about_app_usage_title'] ??
+                    'كيفية استخدام التطبيق:'),
+            _buildUsageInstructions(_selectedLanguage),
             SizedBox(height: 20),
-
-            // التقييم والدعم داخل إطار
-            _buildSectionTitle('التقييم والدعم:'),
-            _buildSupportInfo(),
+            _buildSectionTitle(localizedValues[_selectedLanguage]![
+                    'about_app_support_title'] ??
+                'التقييم والدعم:'),
+            _buildSupportInfo(_selectedLanguage),
           ],
         ),
       ),
@@ -60,69 +69,66 @@ class AppInfoPage extends StatelessWidget {
       style: TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.bold,
-        color: Colors.blueAccent,
+        // color: Colors.blueAccent,
       ),
     );
   }
-
-
 
   // دالة لإضافة إطار إضافي على الجهة اليمنى
   Widget _buildRightBorderContainer(Widget content) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8.0),
-        border: Border(
-          right: BorderSide(color: Colors.blueAccent, width: 4.0), // تعديل هنا
+        padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+        decoration: BoxDecoration(
+          // USE COLOR FROM THEME
+          color: theme.cardColor,
+          borderRadius: BorderRadius.circular(8.0),
+          border: Border(
+            bottom: BorderSide(color: Colors.blueAccent, width: 1.0),
+            right: BorderSide(color: Colors.blueAccent, width: 4.0),
+          ),
         ),
-      ),
-      child: content
-    );
+        child: content);
   }
 
   // دالة لبناء قائمة المميزات داخل إطارات مع تعديل الإطار من الجهة اليمنى
-  Widget _buildFeatureList() {
+  Widget _buildFeatureList(String lang) {
+    final lz = localizedValues[lang]!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildFeatureItem('تصنيفات متنوعة: يحتوي التطبيق على عدة تصنيفات من الرسائل التي تشمل: رسائل حب، رسائل تحفيزية، رسائل تهنئة، ورسائل إسلامية.'),
-        _buildFeatureItem('تخزين الرسائل: يتم تخزين آلاف الرسائل داخل التطبيق بحيث يكون لديك وصول دائم لأفضل الرسائل التي يمكن أن تشاركها مع الآخرين.'),
-        _buildFeatureItem('التحديثات المستمرة: يتم تحديث التطبيق بشكل دوري لإضافة رسائل جديدة في التصنيفات المختلفة.'),
-        _buildFeatureItem('واجهة مستخدم بسيطة: التطبيق يحتوي على تصميم احترافي ونظيف مع واجهة رئيسية سهلة الاستخدام.'),
-        _buildFeatureItem('إمكانية التقييم: يمكن للمستخدمين تقييم التطبيق مباشرة من داخل التطبيق أو عبر فتح متجر التطبيقات.'),
+        _buildFeatureItem(lz['about_app_feature1'] ?? ''),
+        _buildFeatureItem(lz['about_app_feature2'] ?? ''),
+        _buildFeatureItem(lz['about_app_feature3'] ?? ''),
+        _buildFeatureItem(lz['about_app_feature4'] ?? ''),
+        _buildFeatureItem(lz['about_app_feature5'] ?? ''),
       ],
     );
   }
 
   // دالة لبناء عنصر في قائمة المميزات داخل إطار مع تعديل الإطار من الجهة اليمنى
   Widget _buildFeatureItem(String feature) {
-    return
-      Padding(
-        padding: const EdgeInsets.only(top: 8.0),
-        child: _buildRightBorderContainer(
-            Row(
-            children: [
-              Icon(Icons.check_circle, color: Colors.green, size: 18),
-              SizedBox(width: 8),
-              Expanded(child: Text(feature, style: TextStyle(fontSize: 16))),
-            ],
-
-        )
-            ),
-      );
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: _buildRightBorderContainer(Row(
+        children: [
+          Icon(Icons.check_circle, color: Colors.green, size: 18),
+          SizedBox(width: 8),
+          Expanded(child: Text(feature, style: TextStyle(fontSize: 16))),
+        ],
+      )),
+    );
   }
 
   // دالة لبناء تعليمات الاستخدام داخل إطار مع تعديل الإطار من الجهة اليمنى
-  Widget _buildUsageInstructions() {
+  Widget _buildUsageInstructions(String lang) {
+    final lz = localizedValues[lang]!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildInstructionItem('قم بفتح التطبيق لتصفح التصنيفات المتاحة.'),
-        _buildInstructionItem('اختر التصنيف الذي ترغب في تصفحه.'),
-        _buildInstructionItem('اختر الرسالة المناسبة وشاركها مع من تحب.'),
-        _buildInstructionItem('يمكنك التبديل بين التصنيفات بسهولة عبر الأزرار الموجودة في واجهة التطبيق.'),
+        _buildInstructionItem(lz['about_app_usage1'] ?? ''),
+        _buildInstructionItem(lz['about_app_usage2'] ?? ''),
+        _buildInstructionItem(lz['about_app_usage3'] ?? ''),
+        _buildInstructionItem(lz['about_app_usage4'] ?? ''),
       ],
     );
   }
@@ -131,7 +137,8 @@ class AppInfoPage extends StatelessWidget {
   Widget _buildInstructionItem(String instruction) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
-      child: _buildRightBorderContainer( Row(
+      child: _buildRightBorderContainer(
+        Row(
           children: [
             Icon(Icons.arrow_forward, color: Colors.blueAccent, size: 18),
             SizedBox(width: 8),
@@ -143,23 +150,21 @@ class AppInfoPage extends StatelessWidget {
   }
 
   // دالة لبناء معلومات التقييم والدعم داخل إطار مع تعديل الإطار من الجهة اليمنى
-  Widget _buildSupportInfo() {
+  Widget _buildSupportInfo(String lang) {
+    final lz = localizedValues[lang]!;
     return Container(
       padding: EdgeInsets.all(12.0),
       decoration: BoxDecoration(
-        color: Colors.grey[100],
         borderRadius: BorderRadius.circular(8.0),
-        border: Border.all(color: Colors.blueAccent, width: 1.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 4.0,
-            offset: Offset(0, 2),
-          ),
-        ],
+        border: Border(
+          right: BorderSide(color: Colors.blueAccent, width: 4.0),
+          bottom: BorderSide(color: Colors.blueAccent, width: 1.0),
+          top: BorderSide(color: Colors.blueAccent, width: 1.0),
+          left: BorderSide(color: Colors.blueAccent, width: 4.0),
+        ),
       ),
       child: Text(
-        'نحن نحرص على تحسين تجربتك في استخدام التطبيق، لذلك ندعوك لتقييم التطبيق ومشاركة آرائك. إذا كان لديك أي استفسار أو اقتراح، يمكنك التواصل معنا عبر البريد الإلكتروني أو عبر وسائل التواصل الاجتماعي.',
+        lz['about_app_support'] ?? '',
         style: TextStyle(fontSize: 16),
       ),
     );

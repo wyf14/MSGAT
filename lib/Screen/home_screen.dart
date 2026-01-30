@@ -50,11 +50,11 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(localizedValues[_selectedLanguage]!['app_name']!),
           leading: Builder(
             builder: (context) {
-              final isDark = Theme.of(context).brightness == Brightness.dark;
+              // final isDark = Theme.of(context).brightness == Brightness.dark;
               return IconButton(
                 icon: Icon(
                   Icons.menu,
-                  color: isDark ? Colors.orange : Colors.white,
+                  // color: isDark ? Colors.orange : Colors.white,
                 ),
                 onPressed: () => Scaffold.of(context).openDrawer(),
               );

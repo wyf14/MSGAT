@@ -41,6 +41,7 @@ class HomeBodyWidget extends StatelessWidget {
           flex: 2,
           child: Column(
             children: [
+              // custom ad container
               Container(
                 height: 150,
                 margin: EdgeInsets.symmetric(horizontal: 20),
@@ -69,6 +70,7 @@ class HomeBodyWidget extends StatelessWidget {
                   ],
                 ),
               ),
+
               Expanded(
                 child: GridView.count(
                   crossAxisCount: 3,
@@ -120,7 +122,7 @@ class HomeBodyWidget extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(width: double.infinity, child: BannerAdWidget())
+        BannerAdWidget()
       ],
     );
   }

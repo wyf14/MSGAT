@@ -1,125 +1,163 @@
 import 'package:flutter/material.dart';
 
 class MyThemes {
-  // ثيم لايت: برتقالي على أبيض
+  // ---------------- LIGHT THEME (Copilot Colors) ----------------
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: ColorScheme.light(
-      primary: Color(0xFFFF9800), // برتقالي أساسي
-      secondary: Color(0xFFFFB74D), // برتقالي فاتح
-      surface: Color(0xFFFFFFFF),
+      primary: Color(0xFF6B4EFF), // Copilot Purple
+      secondary: Color(0xFFA58CFF), // Light Purple
+      surface: Color(0xFFF7F7F8), // Light Surface
       onPrimary: Colors.white,
-      onSecondary: Color(0xFF333333),
-      onSurface: Color(0xFF222222),
+      onSecondary: Colors.white,
+      onSurface: Color(0xFF1C1C1E), // Soft Black
     ),
-    scaffoldBackgroundColor: Color(0xFFFFFFFF),
+    scaffoldBackgroundColor: Color(0xFFF7F7F8),
     appBarTheme: AppBarTheme(
-      backgroundColor: Color(0xFFFF9800),
-      foregroundColor: Colors.white,
+      backgroundColor: Color(0xFFF7F7F8),
+      foregroundColor: Color(0xFF6B4EFF),
       elevation: 0,
-      iconTheme: IconThemeData(color: Color(0xFFFF9800)),
+      iconTheme: IconThemeData(color: Color(0xFF6B4EFF)),
       titleTextStyle: TextStyle(
-          fontFamily: 'Tajawal',
-          fontWeight: FontWeight.bold,
-          fontSize: 22,
-          color: Colors.white),
+        fontFamily: 'Tajawal',
+        fontWeight: FontWeight.bold,
+        fontSize: 22,
+        color: Color(0xFF6B4EFF),
+      ),
     ),
     textTheme: TextTheme(
       displayLarge: TextStyle(
-          fontFamily: 'Tajawal',
-          color: Color(0xFFFF9800),
-          fontWeight: FontWeight.bold,
-          fontSize: 28),
+        fontFamily: 'Tajawal',
+        color: Color(0xFF6B4EFF),
+        fontWeight: FontWeight.bold,
+        fontSize: 28,
+      ),
       bodyLarge: TextStyle(
-          fontFamily: 'Tajawal', color: Color(0xFF222222), fontSize: 18),
-      bodyMedium: TextStyle(fontFamily: 'Tajawal', color: Color(0xFFFF9800)),
-      bodySmall: TextStyle(fontFamily: 'Tajawal', color: Color(0xFFFFB74D)),
+        fontFamily: 'Tajawal',
+        color: Color(0xFF1C1C1E),
+        fontSize: 18,
+      ),
+      bodyMedium: TextStyle(
+        fontFamily: 'Tajawal',
+        color: Color(0xFF6B4EFF),
+      ),
+      bodySmall: TextStyle(
+        fontFamily: 'Tajawal',
+        color: Color(0xFFA58CFF),
+      ),
     ),
     cardTheme: CardThemeData(
-      color: Colors.white,
-      elevation: 4,
-      shadowColor: Color(0xFFFF9800).withOpacity(0.10),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      color: Color.fromARGB(255, 236, 231, 255),
+      elevation: 0,
+      shadowColor: Color(0xFF6B4EFF).withOpacity(0.08),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Color(0xFFFF9800),
+      backgroundColor: Color(0xFF6B4EFF),
       foregroundColor: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
     ),
     buttonTheme: ButtonThemeData(
-      buttonColor: Color(0xFFFF9800),
+      buttonColor: Color(0xFF6B4EFF),
       textTheme: ButtonTextTheme.primary,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(14),
+      ),
       filled: true,
-      fillColor: Color(0xFFFFF3E0),
-      hintStyle: TextStyle(color: Color(0xFFFFB74D)),
+      fillColor: Color(0xFFEDEBFF),
+      hintStyle: TextStyle(color: Color(0xFFA58CFF)),
     ),
-    iconTheme: IconThemeData(color: Color(0xFFFF9800)),
-    dividerColor: Color(0xFFFF9800).withOpacity(0.15),
+    iconTheme: IconThemeData(color: Color(0xFF6B4EFF)),
+    dividerColor: Color(0xFF6B4EFF).withOpacity(0.15),
   );
 
-  // ثيم دارك: برتقالي على أسود
+  // ---------------- DARK THEME (Copilot Colors) ----------------
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
     colorScheme: ColorScheme.dark(
-      primary: Color(0xFFFF9800), // برتقالي أساسي
-      secondary: Color(0xFFFFB74D), // برتقالي فاتح
-      surface: Color(0xFF23232F),
-      onPrimary: Colors.black,
-      onSecondary: Colors.black,
+      primary: Color(0xFFFFFFFF),
+      secondary: Color.fromARGB(255, 249, 248, 251),
+      surface: Color(0xFF1A1A24),
+      onPrimary: Colors.white,
+      onSecondary: Colors.white,
       onSurface: Colors.white,
     ),
-    scaffoldBackgroundColor: Color(0xFF181820),
+    scaffoldBackgroundColor: Color(0xFF0F0F14),
     appBarTheme: AppBarTheme(
       backgroundColor: Color(0xFF23232F),
-      foregroundColor: Color(0xFFFF9800),
+      foregroundColor: Colors.white,
       elevation: 0,
-      iconTheme: IconThemeData(color: Color(0xFFFF9800)),
+      iconTheme: IconThemeData(color: Colors.white),
       titleTextStyle: TextStyle(
-          fontFamily: 'Tajawal',
-          fontWeight: FontWeight.bold,
-          fontSize: 22,
-          color: Color(0xFFFF9800)),
+        fontFamily: 'Tajawal',
+        fontWeight: FontWeight.bold,
+        fontSize: 22,
+        color: Colors.white,
+      ),
     ),
     textTheme: TextTheme(
       displayLarge: TextStyle(
-          fontFamily: 'Tajawal',
-          color: Color(0xFFFF9800),
-          fontWeight: FontWeight.bold,
-          fontSize: 28),
-      bodyLarge:
-          TextStyle(fontFamily: 'Tajawal', color: Colors.white, fontSize: 18),
-      bodyMedium: TextStyle(fontFamily: 'Tajawal', color: Color(0xFFFF9800)),
-      bodySmall: TextStyle(fontFamily: 'Tajawal', color: Color(0xFFFFB74D)),
+        fontFamily: 'Tajawal',
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+        fontSize: 28,
+      ),
+      bodyLarge: TextStyle(
+        fontFamily: 'Tajawal',
+        color: Colors.white,
+        fontSize: 18,
+      ),
+      bodyMedium: TextStyle(
+        fontFamily: 'Tajawal',
+        color: Colors.white,
+      ),
+      bodySmall: TextStyle(
+        fontFamily: 'Tajawal',
+        color: Colors.white,
+      ),
     ),
     cardTheme: CardThemeData(
-      color: Color(0xFF23232F),
-      elevation: 4,
-      shadowColor: Color(0xFFFF9800).withOpacity(0.10),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      color: Color(0xFF1A1A24),
+      elevation: 0,
+      shadowColor: Color(0xFF6B4EFF).withOpacity(0.10),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Color(0xFFFF9800),
-      foregroundColor: Colors.black,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      backgroundColor: Color(0xFF6A4CD4),
+      foregroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
     ),
     buttonTheme: ButtonThemeData(
-      buttonColor: Color(0xFFFF9800),
+      buttonColor: Color(0xFF6A4CD4),
       textTheme: ButtonTextTheme.primary,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(14),
+      ),
       filled: true,
-      fillColor: Color(0xFF23232F),
-      hintStyle: TextStyle(color: Color(0xFFFFB74D)),
+      fillColor: Color(0xFF1A1A24),
+      hintStyle: TextStyle(color: Color(0xFFA58CFF)),
     ),
-    iconTheme: IconThemeData(color: Color(0xFFFF9800)),
-    dividerColor: Color(0xFFFF9800).withOpacity(0.15),
+    iconTheme: IconThemeData(color: Color(0xFF6B4EFF)),
+    dividerColor: Color(0xFF6B4EFF).withOpacity(0.15),
   );
 }

@@ -15,7 +15,7 @@ class BannerAdWidget extends StatelessWidget {
 
     return adManager.isAdLoaded
         ? Container(
-            width: adManager.bannerAd!.size.width.toDouble(),
+            width: MediaQuery.of(context).size.width,
             height: adManager.bannerAd!.size.height.toDouble(),
             child: AdWidget(ad: adManager.bannerAd!),
           )

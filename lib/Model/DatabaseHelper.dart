@@ -55,7 +55,7 @@ class DatabaseHelper {
 
     await processCsvFile("messages", "baby_messages");
     await processCsvFile("messages", "tips_messages");
-    await processCsvFile("messages", "positivity_messages");
+    await processCsvFile("messages", "optimism_messages");
     await processCsvFile("messages", "blessing_messages");
     await processCsvFile("messages", "be_positive_messages");
     await processCsvFile("messages", "marriage_messages");

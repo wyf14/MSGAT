@@ -51,7 +51,7 @@ class AdManager extends ChangeNotifier {
   void _loadBannerAd() {
     if (_bannerAd == null) {
       _bannerAd = BannerAd(
-        size: AdSize.fullBanner, // عرض كامل الصفحة
+        size: AdSize.banner, // عرض كامل الصفحة
         adUnitId: AdHelper.bannerAdUnitId(),
         listener: BannerAdListener(
           onAdLoaded: (ad) {
